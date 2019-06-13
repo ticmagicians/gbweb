@@ -1,0 +1,28 @@
+<p>Date/Time: <span id="datetime"></span></p>	 
+ 	<script>
+ 	var dt = new Date();
+ 	document.getElementById("datetime").innerHTML = (("0"+(dt.getMonth()+1)).slice(-2)) +"/"+ (("0"+dt.getDate()).slice(-2)) +"/"+ (dt.getFullYear()) +" "+ (("0"+dt.getHours()+1).slice(-2)) +":"+ (("0"+dt.getMinutes()+1).slice(-2));
+ 	</script>
+ 	<table style="height: 395px; border-color:#2b2301;" border="3" width="664">
+ 	<tbody>
+ 	<tr style="height: 72px;">
+ 	<td style="width: 654px; height: 72px; text-align: center;" colspan="3">
+ 	<h1><strong>TEAM GREEN_BERETS&nbsp;</strong></h1>
+ 	</td>
+ 	</tr>
+ 	<tr style="height: 75px;">
+ 	<td style="width: 654px; height: 75px;" colspan="3"><span style="text-decoration: underline;"><strong>Demo:</strong></span> CI/CD setup using Jenkins Pipeline Job to publish ASP website package to IIS server hosted on AWS EC2 Instances,&nbsp; We will be demonstrating Blue-Green deployments by taking one of the EC2 instances out of the Loadbalance and deploying the new webpage updates and testing it before adding the instance back to the load balancer.&nbsp; We are leveraging S3 buckets for publishing static web contents like images.</td>
+ 	</tr>
+ 	<tr style="height: 75px;">
+ 	<td style="width: 188px; height: 75px;">Web Page Version -1&nbsp;</td>
+ 	<td style="width: 252px; height: 75px;">
+ 	<p>Image 1</p>
+ 	<p><img src="https://gbweb-v1.s3.ca-central-1.amazonaws.com/awss3.png" alt="Image 1" width="238" height="82" /></p>
+ 	</td>
+ 	<td style="width: 202px; height: 75px;">
+ 	<p>Image 2</p>
+ 	<p><img src="https://gbweb-v1.s3.ca-central-1.amazonaws.com/jenkins.png" alt="Image 2" width="238" height="82" /></p>
+ 	</td>
+ 	</tr>
+ 	</tbody>
+ 	</table>
