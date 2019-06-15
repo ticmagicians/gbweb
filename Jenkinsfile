@@ -10,10 +10,7 @@ node {
  	    
   withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', 
                     credentialsId: 'green_berets', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']])
-  withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'WindowsOpenSSH_Creds',
-                    usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) 
-  println(env.USERNAME)
-  { 
+    { 
  	    stage('Cloning Git') {
  	      git 'https://github.com/ticmagicians/gbweb'
       }
@@ -24,7 +21,11 @@ node {
  	
       stage('Code Deploy') {
  	      echo " Code Deploy" 
- 	      sh "sshpass -p ${env.gbpass} scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -r /var/lib/jenkins/workspace/Web-Blue-Green-Deploy/default.html gbadmin@${env.instance_ip}:/c:/inetpub/wwwroot/gbweb"
+        withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'WindowsOpenSSH_Creds',
+                          usernameVariable: 'USERNAME', passwordVariable: 'gbpass']]) {
+              println(env.USERNAME)
+ 	            sh "sshpass -p ${env.gbpass} scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -r /var/lib/jenkins/workspace/Web-Blue-Green-Deploy/default.html gbadmin@${env.instance_ip}:/c:/inetpub/wwwroot/gbweb"
+        }
       }
  	
       stage('QA Sign-off') {
