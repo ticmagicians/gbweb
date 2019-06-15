@@ -24,7 +24,7 @@ node {
             script: "aws ec2 describe-instances --instance-ids ${env.instance_id} --region ca-central-1 |\
 jq -r '.Reservations[].Instances[].NetworkInterfaces[].PrivateIpAddress'",
             returnStdout: true
-            )
+            ).trim()
         echo "Instance IP: ${instance_ip}"
 		    scphostpath = "gbadmin@${instance_ip}:/c:/inetpub/wwwroot/gbweb"
 		    echo "SCP Host Path: ${scphostpath}"
