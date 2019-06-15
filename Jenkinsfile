@@ -29,7 +29,7 @@ jq -r '.Reservations[].Instances[].NetworkInterfaces[].PrivateIpAddress'",
         withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'gbadmin',
                           usernameVariable: 'USERNAME', passwordVariable: 'gbpass']]) {
               println(env.USERNAME)
- 	            sh "sshpass -p ${env.gbpass} scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -r /var/lib/jenkins/workspace/Web-Blue-Green-Deploy/default.html gbadmin@${instance_ip}:/c:/inetpub/wwwroot/gbweb"
+ 	            sh "sshpass -p ${env.gbpass} scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -r /var/lib/jenkins/workspace/GB_Web_Deploy/default.html gbadmin@${instance_ip}:/c:/inetpub/wwwroot/gbweb"
         }
       }
  	
