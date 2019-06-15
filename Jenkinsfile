@@ -8,7 +8,7 @@ node {
  	echo "${env.instance_ip}" 
  	    
   withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', 
-                    credentialsId: 'green_berets', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']])
+                    credentialsId: 'ws_creds', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']])
     { 
  	    stage('Cloning Git') {
  	      git 'https://github.com/ticmagicians/gbweb'
