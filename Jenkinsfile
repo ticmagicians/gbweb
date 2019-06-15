@@ -30,7 +30,7 @@ jq -r '.Reservations[].Instances[].NetworkInterfaces[].PrivateIpAddress'",
 		    echo "SCP Host: ${scphost}"
         withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'gbadmin_creds',
                           usernameVariable: 'USERNAME', passwordVariable: 'gbpass']]) {
- 	            sh "sshpass -p ${env.gbpass} scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -r $WORKSPACE/default.html ${scphost}:/c:/inetpub/wwwroot/gbweb"
+		sh "sshpass -p ${env.gbpass} scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -r /var/lib/jenkins/workspace/GB_Web_Deploy/default.html  ${scphost}:/c:/inetpub/wwwroot/gbweb"
         }
       }
  	
