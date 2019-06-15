@@ -20,10 +20,14 @@ node {
  	
       stage('Code Deploy') {
  	      echo " Code Deploy" 
+        instance_ip = sh (
+            aws ec2 describe-instances --instance-id ${env.instance_id} | jq —raw-output .Reservations[].Instances[].PrivateIpAddress
+            ).trim()
+        echo "Instance IP: ${instance_ip}"
         withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'gbadmin',
                           usernameVariable: 'USERNAME', passwordVariable: 'gbpass']]) {
               println(env.USERNAME)
- 	            sh "sshpass -p ${env.gbpass} scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -r /var/lib/jenkins/workspace/Web-Blue-Green-Deploy/default.html gbadmin@${env.instance_ip}:/c:/inetpub/wwwroot/gbweb"
+ 	            sh "sshpass -p ${env.gbpass} scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -r /var/lib/jenkins/workspace/Web-Blue-Green-Deploy/default.html gbadmin@${instance_ip}:/c:/inetpub/wwwroot/gbweb"
         }
       }
  	
