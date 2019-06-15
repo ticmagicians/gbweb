@@ -21,8 +21,7 @@ node {
       stage('Code Deploy') {
  	      echo " Code Deploy" 
         instance_ip = sh (
-            "aws ec2 describe-instances --instance-id ${env.instance_id} --query 'Reservations[].Instances[].PrivateIpAddress' --region ca-central-1"
-            ).trim()
+            "aws ec2 describe-instances --instance-id ${env.instance_id} --query 'Reservations[].Instances[].PrivateIpAddress' --region ca-central-1")
         echo "Instance IP: ${instance_ip}"
         withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'gbadmin',
                           usernameVariable: 'USERNAME', passwordVariable: 'gbpass']]) {
