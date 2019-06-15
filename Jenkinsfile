@@ -4,8 +4,8 @@ node {
   Environment Variables 
   env.instance_id = "${instance_id}" 
  	echo "${env.instance_id}" 
- 	env.instance_ip = "${instance_ip}" 
- 	echo "${env.instance_ip}" 
+ 	//env.instance_ip = "${instance_ip}" 
+ 	//echo "${env.instance_ip}" 
  	    
   withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', 
                     credentialsId: 'aws_creds', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']])
