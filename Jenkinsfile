@@ -20,7 +20,7 @@ node {
  	
       stage('Code Deploy') {
  	      echo " Code Deploy" 
-        withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'WindowsOpenSSH_Creds',
+        withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'gbadmin',
                           usernameVariable: 'USERNAME', passwordVariable: 'gbpass']]) {
               println(env.USERNAME)
  	            sh "sshpass -p ${env.gbpass} scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -r /var/lib/jenkins/workspace/Web-Blue-Green-Deploy/default.html gbadmin@${env.instance_ip}:/c:/inetpub/wwwroot/gbweb"
