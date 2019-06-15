@@ -26,11 +26,11 @@ jq -r '.Reservations[].Instances[].NetworkInterfaces[].PrivateIpAddress'",
             returnStdout: true
             )
         echo "Instance IP: ${instance_ip}"
-		    scphost = "gbadmin@${instance_ip}"
-		    echo "SCP Host: ${scphost}"
+		    scphostpath = "gbadmin@${instance_ip}:/c:/inetpub/wwwroot/gbweb"
+		    echo "SCP Host Path: ${scphostpath}"
         withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'gbadmin_creds',
                           usernameVariable: 'USERNAME', passwordVariable: 'gbpass']]) {
-		sh "sshpass -p ${env.gbpass} scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null /var/lib/jenkins/workspace/GB_Web_Deploy/default.html ${scphost}:/c:/inetpub/wwwroot/gbweb"
+		sh "sshpass -p ${env.gbpass} scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null /var/lib/jenkins/workspace/GB_Web_Deploy/default.html ${scphostpath}"
         }
       }
  	
