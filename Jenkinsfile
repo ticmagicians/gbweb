@@ -28,7 +28,7 @@ jq -r '.Reservations[].Instances[].NetworkInterfaces[].PrivateIpAddress'",
         echo "Instance IP: ${instance_ip}"
 		    scphost = "gbadmin@${instance_ip}"
 		    echo "SCP Host: ${scphost}"
-        withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'gbadmin',
+        withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'gbadmin_creds',
                           usernameVariable: 'USERNAME', passwordVariable: 'gbpass']]) {
  	            sh "sshpass -p ${env.gbpass} scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -r $WORKSPACE/default.html ${scphost}:/c:/inetpub/wwwroot/gbweb/default.html"
         }
